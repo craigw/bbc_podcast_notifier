@@ -1,0 +1,6 @@
+[submodule "vendor/gems/smqueue"]
+	path = vendor/gems/smqueue
+	url = git://github.com/seanohalpin/smqueue.git
+[submodule "vendor/gems/doodle"]
+	path = vendor/gems/doodle
+	url = git://github.com/seanohalpin/doodle.git

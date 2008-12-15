@@ -1,0 +1,24 @@
+#!/usr/bin/env ruby -w
+
+require File.dirname(__FILE__) + '/../init'
+include BBC
+
+`[ -d #{File.dirname(__FILE__) + '/../notified/'} ] || mkdir #{File.dirname(__FILE__) + '/../notified/'}`
+
+podcast_queue = {
+  :configuration => HashWithIndifferentAccess.new(
+    YAML.parse(File.read('/etc/podcast_notifier.yml')).transform
+  )
+}
+@new_podcasts = SMQueue(podcast_queue)
+loop do
+  podcasts = Podcast.find_all.select { |podcast|
+    !File.exists?(File.dirname(__FILE__) + '/../notified/' + podcast.id)
+  }
+  podcasts.each do |podcast|
+    puts "New podcast #{podcast.id}"
+    @new_podcasts.put podcast.to_yaml
+    `touch #{File.dirname(__FILE__) + '/../notified/' + podcast.id}`
+  end
+  sleep 300
+end
