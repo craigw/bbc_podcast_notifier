@@ -1,5 +1,27 @@
 #!/usr/bin/env ruby -w
 
+# Sends YAML representations of newly published podcasts to a queue.
+#
+# The YAML looks something like this:
+#     {
+#       "pubdate"=>Mon Dec 15 12:41:00 +0000 2008,
+#       "title"=>"AsianNews: Historic win for India in the 1st Test in Chennai 15 Dec 08",
+#       "medium"=>"audio",
+#       "url"=>"http://downloads.bbc.co.uk/podcasts/asiannetwork/asiannews/asiannews_20081215-1241a.mp3",
+#       "type"=>"audio/mpeg",
+#       "author"=>"BBC Asian Network",
+#       "subtitle"=>"AsianNews",
+#       "expression"=>"full",
+#       "description"=>"India defeat England in Chennai as Sachin Tendulkar gets his 41st Test hundred.  A woman who was locked up by her parents as they tried to force her into marriage in Bangladesh is now free from her parents and on her way home. Also on the Wrap an Asian Network investigation into how Muslim woman are being discriminated against by some imams.",
+#       "summary"=>"British Asian News",
+#       "enclosure"=>"http://downloads.bbc.co.uk/podcasts/asiannetwork/asiannews/asiannews_20081215-1241a.mp3",
+#       "filesize"=>"10549706",
+#       "id"=>"197366ce31729f6d2dc44e1e16f0dcc4b647677e",
+#       "duration"=>"659",
+#       "keywords"=>"News, bbc, asian, sport, entertainment, journalism, British Asian, bollywood"
+#     }
+#
+
 require File.dirname(__FILE__) + '/../init'
 include BBC
 
