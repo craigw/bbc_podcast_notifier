@@ -1,0 +1,6 @@
+== 0.0.1 / 2008-12-15
+
+* Initial release
+  - Very little documentation.
+  - But then, very little code.
+  - Enjoy!
