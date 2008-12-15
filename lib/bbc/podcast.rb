@@ -44,6 +44,10 @@ module BBC
     end
     
     def to_yaml
+      to_hash.to_yaml
+    end
+
+    def to_hash
       returning({}) do |hash|
         instance_variables.each do |var|
           accessor = var[1..-1]
@@ -52,7 +56,7 @@ module BBC
           end
         end
         hash[:id] = id
-      end.to_yaml
+      end
     end
   end
 end
