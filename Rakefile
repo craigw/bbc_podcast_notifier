@@ -20,6 +20,8 @@ spec = Gem::Specification.new do |s|
   # To generate smqueue-0.1.0 see my post at:
   # http://barkingiguana.com/2009/01/01/writing-rubystomp-clients-with-smqueue
   s.add_dependency('smqueue', '>= 0.1.0')
+  s.add_dependency('hpricot')
+  s.add_dependency('activesupport')
 end
 
 Rake::GemPackageTask.new(spec) do |pkg|

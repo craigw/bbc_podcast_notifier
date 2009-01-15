@@ -24,7 +24,8 @@
 
 puts "Starting #{File.basename($0)}"
 
-require File.dirname(__FILE__) + '/../init'
+require 'rubygems'
+require 'podcast_notifier'
 include BBC
 
 archive = "#{ENV['HOME']}/notified/"
@@ -50,7 +51,7 @@ loop do
   podcasts.each do |podcast|
     puts "New podcast #{podcast.id}"
     @new_podcasts.put podcast.to_yaml
-    File.open(archive + podcast.id + '.yml'}) do |f|
+    File.open(archive + podcast.id + '.yml', 'w+') do |f|
       f.puts podcast.to_yaml
       f.flush
     end

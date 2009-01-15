@@ -1,1 +1,1 @@
-require File.dirname(__FILE__) + '/lib/bbc'
+require File.dirname(__FILE__) + '/lib/podcast_notifier'
