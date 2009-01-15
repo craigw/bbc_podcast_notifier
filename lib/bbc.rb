@@ -1,5 +1,4 @@
 $:.unshift File.dirname(__FILE__)
-$:.unshift File.dirname(__FILE__) + '/../vendor/gems/smqueue/lib'
 
 require 'rubygems'
 require 'hpricot'
