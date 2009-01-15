@@ -22,25 +22,38 @@
 #     }
 #
 
+puts "Starting #{File.basename($0)}"
+
 require File.dirname(__FILE__) + '/../init'
 include BBC
 
-`[ -d #{File.dirname(__FILE__) + '/../notified/'} ] || mkdir #{File.dirname(__FILE__) + '/../notified/'}`
+archive = "#{ENV['HOME']}/notified/"
+configuration_file = '/etc/podcast_notifier.yml'
+
+if !File.exists?(configuration_file)
+  puts "Configuration file not found: #{configuration_file}"
+  exit
+end
+
+`[ -d #{archive} ] || mkdir #{archive}`
 
 podcast_queue = {
   :configuration => HashWithIndifferentAccess.new(
-    YAML.parse(File.read('/etc/podcast_notifier.yml')).transform
+    YAML.parse(File.read(configuration_file)).transform
   )
 }
 @new_podcasts = SMQueue(podcast_queue)
 loop do
   podcasts = Podcast.find_all.select { |podcast|
-    !File.exists?(File.dirname(__FILE__) + '/../notified/' + podcast.id)
+    !File.exists?(archive + podcast.id + '.yml')
   }
   podcasts.each do |podcast|
     puts "New podcast #{podcast.id}"
     @new_podcasts.put podcast.to_yaml
-    `touch #{File.dirname(__FILE__) + '/../notified/' + podcast.id}`
+    File.open(archive + podcast.id + '.yml'}) do |f|
+      f.puts podcast.to_yaml
+      f.flush
+    end
   end
   sleep 300
 end
